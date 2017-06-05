@@ -1,8 +1,8 @@
 # Based on manual compile instructions at http://wiki.nginx.org/HttpLuaModule#Installation
 FROM debian:jessie
 
-ENV VER_NGINX_DEVEL_KIT=0.2.19
-ENV VER_LUA_NGINX_MODULE=0.9.16
+ENV VER_NGINX_DEVEL_KIT=0.3.0
+ENV VER_LUA_NGINX_MODULE=0.10.8
 ENV VER_NGINX=1.7.10
 ENV VER_LUAJIT=2.0.4
 
@@ -50,7 +50,7 @@ RUN make
 RUN make install
 # Nginx with LuaJIT
 WORKDIR /nginx-${VER_NGINX}
-RUN ./configure --prefix=${NGINX_ROOT} --with-ld-opt="-Wl,-rpath,${LUAJIT_LIB}" --add-module=/${NGINX_DEVEL_KIT} --add-module=/${LUA_NGINX_MODULE}
+RUN ./configure --prefix=${NGINX_ROOT} --with-http_stub_status_module --with-http_ssl_module --with-http_sub_module --with-md5=/usr/lib --with-sha1=/usr/lib --with-http_gzip_static_module --with-ld-opt="-Wl,-rpath,${LUAJIT_LIB}" --add-module=/${NGINX_DEVEL_KIT} --add-module=/${LUA_NGINX_MODULE}
 RUN make -j2
 RUN make install
 RUN ln -s ${NGINX_ROOT}/sbin/nginx /usr/local/sbin/nginx
