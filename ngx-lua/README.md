@@ -1,0 +1,8 @@
+nginx  lua 开发环境
+
+
+相关版本信息
+NGINX_DEVEL_KIT=0.3.0
+LUA_NGINX_MODULE=0.10.8
+NGINX=1.7.10
+LUAJIT=2.0.4
